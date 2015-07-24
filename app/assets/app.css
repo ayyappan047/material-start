@@ -132,3 +132,12 @@ span.name {
   font-size:1.1em;
   padding-left:5px;
 }
+
+md-content {
+  margin: auto 350px;
+  height: 500px;
+}
+
+md-content p {
+  line-height: 2rem;
+}
