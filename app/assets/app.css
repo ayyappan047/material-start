@@ -20,6 +20,10 @@ md-toolbar h1 {
   margin: auto;
 }
 
+md-toolbar {
+  background-color: blue;
+}
+
 /* Sidenav area */
 
 md-list .md-button {
