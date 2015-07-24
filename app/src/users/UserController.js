@@ -3,7 +3,7 @@
   angular
        .module('users')
        .controller('UserController', [
-          'userService', '$mdSidenav', '$mdBottomSheet', '$log', '$q',
+          'userService', '$mdSidenav', '$mdBottomSheet', '$log', '$q', '$mdToast',
           UserController
        ]);
 
@@ -14,7 +14,7 @@
    * @param avatarsService
    * @constructor
    */
-  function UserController( userService, $mdSidenav, $mdBottomSheet, $log, $q) {
+  function UserController( userService, $mdSidenav, $mdBottomSheet, $log, $q, $mdToast) {
     var self = this;
 
     self.selected     = null;
@@ -22,6 +22,8 @@
     self.selectUser   = selectUser;
     self.toggleList   = toggleUsersList;
     self.showContactOptions  = showContactOptions;
+    self.getToastPosition = getToastPosition;
+    self.showSimpleToast = showSimpleToast;
 
     // Load all registered users
 
@@ -87,10 +89,32 @@
           ];
           this.submitContact = function(action) {
             $mdBottomSheet.hide(action);
+            self.showSimpleToast(action);
           };
         }
     }
 
+    self.toastPosition = {
+      bottom: false,
+      top: true,
+      left: false,
+      right: true
+    };
+    
+    function getToastPosition() {
+      return Object.keys(self.toastPosition)
+        .filter(function(pos) { return self.toastPosition[pos]; })
+        .join(' ');
+    };
+
+    function showSimpleToast(action) {
+      $mdToast.show(
+        $mdToast.simple()
+          .content('Contacted ' + self.selected.name + ' via ' + action.name)
+          .position(self.getToastPosition())
+          .hideDelay(3000)
+      );
+    };
   }
 
 })();
