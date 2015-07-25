@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="assets/app.css"/>
   </head>
 
-  <body ng-app="starterApp" layout="row" ng-controller="UserController as ul">
+  <body ng-app="starterApp" layout="row" ng-controller="UserController as ul" md-theme="{{ dynamicTheme }}" md-theme-watch>
 
   <md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2"
                 md-component-id="left">
@@ -41,6 +41,8 @@
         <md-icon md-svg-icon="menu" ></md-icon>
       </md-button>
       <h1>Angular Material Demo</h1>
+      <md-button ng-click="dynamicTheme = 'default'">Default</md-button>
+      <md-button ng-click="dynamicTheme = 'alternate'">Alternate</md-button>
     </md-toolbar>
 
     <md-content class="md-padding">
@@ -86,9 +88,14 @@
                       .icon("phone"      , "./assets/svg/phone.svg"       , 512);
 
                       $mdThemingProvider.theme('default')
-                          .primaryPalette('brown')
-                          .accentPalette('red');
+                          .primaryPalette('green')
+                          .accentPalette('blue');
 
+                          $mdThemingProvider.theme('alternate')
+                            .primaryPalette('blue')
+                            .accentPalette('green');
+
+                      $mdThemingProvider.alwaysWatchTheme(true);
               });
 
     </script>
